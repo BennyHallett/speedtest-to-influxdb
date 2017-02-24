@@ -1,0 +1,16 @@
+---
+
+version: '2'
+services:
+  influxdb:
+    image: 'influxdb'
+    environment:
+      - INFLUXDB_GRAPHITE_ENABLED=true
+  grafana:
+    depends_on:
+      - influxdb
+    image: 'grafana/grafana'
+    ports:
+      - 3000:3000
+  speed_reporter:
+    build: .
